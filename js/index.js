@@ -1,6 +1,7 @@
 (function init() {
     let clockEl = document.getElementById('clock');
-    let currentTime = new Date();
+    let syncInterval = 5 * 60 * 1000; // как часто синхронизировать с внешним API в миллисекундах
+    let updatedTime = new Date(); //время обновленное через интернет или локально инкрементом по секундам 
     
     function sendXMLHttpRequest(url) {
         console.log("отправляем запрос на " + url);
@@ -9,6 +10,8 @@
         xhr.onreadystatechange = function () {          
             if (this.readyState == 4 && this.status == 200) {
                 parseNewTime(xhr.responseText);
+            } else if (this.status == 0) {
+                console.log('Отсутствует подключение к интернету');
             } else if (this.status != 200) {
                 console.error('Ошибка. Статус: ' + this.status + ' Этап запроса ' + this.readyState); 
             }
@@ -21,37 +24,38 @@
     }
     
     function parseNewTime(newTimeStr) {
-        newTime = JSON.parse(newTimeStr);  
-        currentTime = new Date(newTime.datetime);
-        console.dir(currentTime);
+        let newTimeObj = JSON.parse(newTimeStr);  
+        updatedTime = new Date(newTimeObj.datetime); 
     }
 
-    function updateTime() {         
-        //функция setInterval не гарантирует вызов каждую секунду,
-        //потому что в расчётный интервал вход время выполнения функции,
-        //поэтому можно делать  Date.now() каждую секунду или выполнять синхронихацию через интернет
+    function updateTime() {
+        updatedTime.setSeconds(updatedTime.getSeconds() + 1);
+        showFormattedTime(); 
+    }   
 
-        let hours = currentTime.getHours();
-        if (hours < 10) hours = '0' + hours;
-        clockEl.children[0].innerText = hours;
+    function showFormattedTime() {
+        if (toLocaleStringSupportsLocales() != true) console.log = ('Браузер не поддерживает toLocaleString()');
+        var options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        clockEl.innerText = updatedTime.toLocaleString('ru-RU', options);
+        //document.title = updatedTime.toLocaleString('ru-RU', options);
+        // https://jsfiddle.net/yashva/9fuj3pad/
+    }
 
-        let minutes = currentTime.getMinutes();
-        if (minutes < 10) minutes = '0' + minutes;
-        clockEl.children[1].innerText = minutes;
-
-        let seconds = currentTime.getSeconds();
-        if (seconds < 10) seconds = '0' + seconds;
-        clockEl.children[2].innerText = seconds;
-
-        currentTime.setSeconds(currentTime.getSeconds()+1);
-        // document.title = hours + ":" + minutes + ":" + seconds;
-    }    
+    function toLocaleStringSupportsLocales() {
+        try {
+            new Date().toLocaleString('i');
+        } catch (e) {
+            return e.name === 'RangeError';
+        }
+        return false;
+    }
     
     function startClock() {
-        updateTime(); 
+        updateTime(); //сразу запускаем setInterval callback что бы браузер не ждал одну секунду до первого обновления
+        syncTime();  //сразу запускаем синхронизацию, на случай если на клиенте установлено неправильное время 
         let timerId = setInterval(updateTime, 1000);
-        let syncId = setInterval(syncTime, 300000);
-        // let syncId = setInterval(syncTime, 5000);
+        let syncId = setInterval(syncTime, syncInterval); 
+        
     }
         
     startClock();
