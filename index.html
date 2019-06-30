@@ -14,16 +14,19 @@
 </head>
 
 <body>
-  <h1>Текущее время</h1>
-  <div id="clock">    
+  <h1 class="cityName">Текущее время</h1>
+  <div class="clock"></div>
+  <div class="date"></div>
+  <input class="checkbox" type="checkbox" id="amPmFormatSwitch" /><label class="checkbox" for="amPmFormatSwitch">12&nbsp;&nbsp;&nbsp;24</label>
+  <br>
+  <div class="citySelect">
+      <label for="citySelect">Выберете город:</label>
+      <select id="citySelect">
+        <option value="LED">LED</option>
+        <option value="JFK">JFK</option>
+        <option value="NRT">NRT</option>
+      </select>
   </div>
-<label for="pet-select">Выберете город:</label>
-<select id="pet-select">
-  <option value="Europe/Moscow">Санкт-Петербург</option>
-  <option value="Europe/Moscow">Москва</option>
-  <option value="dog">Токио</option>
-  <option value="dog">Нью-Йорк</option>
-</select>
   <script src="js/index.js"></script>
 </body>
 

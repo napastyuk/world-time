@@ -1,0 +1,51 @@
+/*common styles*/
+.clock {
+    font-size: 25vh;
+}   
+
+/*toggle styles*/
+input.checkbox[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+label.checkbox {
+    cursor: pointer;
+    width: 140px;
+    height: 50px;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+    font-size: 50px;
+    line-height: 50px;
+    padding: 20px;
+}
+
+label.checkbox:after {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 80px;
+	height: 80px;
+	background: #fff;
+	border-radius: 80px;
+	transition: 0.3s;
+	font-size: 40px;
+	font-family:Arial;
+}
+
+input.checkbox:checked + label.checkbox {
+	background: #bada55;
+}
+
+input.checkbox:checked + label.checkbox:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}
+
+label.checkbox:active:after {
+	width: 130px;
+}
