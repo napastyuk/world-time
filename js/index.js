@@ -72,7 +72,7 @@
         //сгенерируем селект из тех городов которые есть в объекте cityList        
         let citySelectLabelEl = document.createElement('label');
         citySelectLabelEl.setAttribute('for', 'citySelect');
-        citySelectLabelEl.innerText = 'Выберете город: ';
+        citySelectLabelEl.innerText = 'Выберите город: ';
         citySelectWrapperEl.appendChild(citySelectLabelEl);
 
         let citySelectSelectEl = document.createElement('select');
