@@ -14,18 +14,14 @@
 </head>
 
 <body>
-  <h1 class="cityName">Текущее время</h1>
+  <h1>Точное время</h1>
+  <div class="citySelectWrapper"></div>
   <div class="clock"></div>
   <div class="date"></div>
-  <input class="checkbox" type="checkbox" id="amPmFormatSwitch" /><label class="checkbox" for="amPmFormatSwitch">12&nbsp;&nbsp;&nbsp;24</label>
-  <br>
-  <div class="citySelect">
-      <label for="citySelect">Выберете город:</label>
-      <select id="citySelect">
-        <option value="LED">LED</option>
-        <option value="JFK">JFK</option>
-        <option value="NRT">NRT</option>
-      </select>
+  <div class="timeFormatCheckbox">
+    <span>12-ти часовой формат</span>
+    <input class="checkbox" type="checkbox" id="amPmFormatSwitch" /><label class="checkbox" for="amPmFormatSwitch"></label>
+    <span>24 часовой формат</span>
   </div>
   <script src="js/index.js"></script>
 </body>

@@ -1,51 +1,67 @@
 /*common styles*/
+
+html {
+    font-family: TimesNewRoman, "Times New Roman", Times, serif;
+    font-size: 30px;
+    text-align: center;
+}
+
+body>* {
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+.cityName {
+    font-size: 1rem;
+}
+
 .clock {
-    font-size: 25vh;
-}   
+    font-size: 6rem;
+}
+
+.date::first-letter {
+    text-transform: capitalize;
+}
+
+.timeFormatCheckbox>* {
+    display: inline-block;
+    vertical-align: middle;
+}
 
 /*toggle styles*/
-input.checkbox[type=checkbox]{
-	height: 0;
-	width: 0;
-	visibility: hidden;
+
+input.checkbox[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
 }
 
 label.checkbox {
     cursor: pointer;
-    width: 140px;
-    height: 50px;
-    background: grey;
-    display: block;
-    border-radius: 100px;
+    width: 2rem;
+    height: calc(1rem + 4px);
+    background: gray;
+    display: inline-block;
+    border-radius: 1rem;
     position: relative;
-    font-size: 50px;
-    line-height: 50px;
-    padding: 20px;
 }
 
 label.checkbox:after {
-	content: '';
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	width: 80px;
-	height: 80px;
-	background: #fff;
-	border-radius: 80px;
-	transition: 0.3s;
-	font-size: 40px;
-	font-family:Arial;
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1rem;
+    height: 1rem;
+    background: #fff;
+    border-radius: 1rem;
+    transition: 0.3s;
 }
 
-input.checkbox:checked + label.checkbox {
-	background: #bada55;
-}
-
-input.checkbox:checked + label.checkbox:after {
-	left: calc(100% - 5px);
-	transform: translateX(-100%);
-}
-
-label.checkbox:active:after {
-	width: 130px;
+input.checkbox:checked+label.checkbox:after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
 }
